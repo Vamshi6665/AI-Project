@@ -23,7 +23,7 @@ FIELD_PATTERNS = {
 SECTION_KEYS = [
     ("diagnos", "diagnoses"), ("reason for", "diagnoses"), ("medication", "medications"),
     ("allerg", "allergies"), ("lab", "lab_results"), ("result", "lab_results"), ("vital", "vitals"),
-    ("procedure", "procedures"), ("follow", "follow_up"),
+    ("procedure", "procedures"), ("follow", "follow_up"), ("social", "social_history"),
 ]
 
 DX_RE = re.compile(r"^(.*?)\s*\(([A-Z]\d{2}(?:\.\d{1,4})?)\)\s*(?:[-–]\s*(\w+))?$")
@@ -115,6 +115,7 @@ def heuristic_extract(text: str) -> dict:
         "vitals": vitals,
         "procedures": sections.get("procedures", []),
         "follow_up": sections.get("follow_up", []),
+        "social_history": sections.get("social_history", []),
         "summary": f"Mock extraction of a {doc_type}. Set LLM_PROVIDER=openai or sagemaker "
                    "for a model-written summary and better results on free-text documents.",
     }

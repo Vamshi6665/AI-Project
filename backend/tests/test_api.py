@@ -80,6 +80,8 @@ def test_extract_discharge_summary(client, token):
     assert rec["data"]["patient"]["mrn"] == "RGH-0048213"
     assert len(rec["data"]["medications"]) == 4
     assert {lab["flag"] for lab in rec["data"]["lab_results"]} >= {"high", "low", "normal"}
+    assert len(rec["data"]["social_history"]) == 3
+    assert any("smoker" in s for s in rec["data"]["social_history"])
     assert rec["document"]["pages"] >= 1 and rec["inference"]["attempts"] == 1
 
     # It shows up in history and can be fetched by id.

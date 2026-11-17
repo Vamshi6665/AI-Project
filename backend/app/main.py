@@ -7,7 +7,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .config import get_settings
+from .config import get_settings, production_problems
 from .errors import register_exception_handlers
 from .logging_config import setup_logging
 from .middleware import RequestContextMiddleware
@@ -21,10 +21,9 @@ logger = logging.getLogger("app")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     settings = get_settings()
-    if settings.environment == "prod" and (
-        settings.jwt_secret.startswith("change-me") or settings.demo_password == "demo123"
-    ):
-        raise RuntimeError("Refusing to start in prod with the default JWT_SECRET or DEMO_PASSWORD")
+    problems = production_problems(settings)
+    if problems:
+        raise RuntimeError("Refusing to start in prod: " + "; ".join(problems))
     app.state.llm = build_llm_client(settings)
     app.state.store = ExtractionStore()
     logger.info("startup", extra={"provider": app.state.llm.provider, "model": app.state.llm.model,

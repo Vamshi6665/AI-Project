@@ -133,6 +133,9 @@ export default function ResultsView({ record, fileUrl }) {
                     <Section title="Procedures"><BulletList items={data.procedures} empty="None recorded" /></Section>
                     <Section title="Follow-up"><BulletList items={data.follow_up} empty="None recorded" /></Section>
                   </SimpleGrid>
+                  <Section title="Social history">
+                    <BulletList items={data.social_history ?? []} empty="None recorded" />
+                  </Section>
                 </Stack>
               </TabPanel>
 

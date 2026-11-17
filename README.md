@@ -50,8 +50,8 @@ docker compose down
 1. `python infra/sagemaker/deploy_endpoint.py --role-arn <SageMaker execution role ARN>`
 2. `python infra/sagemaker/test_endpoint.py`
 3. Launch EC2 (Ubuntu 24.04, t3.medium) with the `clinical-ai-ec2-role` instance profile
-4. On EC2: `bash infra/ec2/setup_ubuntu.sh`, clone repo, create `backend/.env` with
-   `LLM_PROVIDER=sagemaker`, `ENVIRONMENT=prod`, a real `JWT_SECRET` and `DEMO_PASSWORD`
+4. On EC2: clone repo, `bash infra/ec2/setup_ubuntu.sh`, then `bash infra/ec2/make_env.sh`
+   (writes `backend/.env` with a generated JWT secret and demo password; save the password it prints)
 5. `docker compose up -d --build`
 6. **When done for the day:** `python infra/sagemaker/delete_endpoint.py`
 

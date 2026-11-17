@@ -64,6 +64,11 @@ discharge = (
         "Hypokalemia (E87.6) - resolved",
     ])
     + section("Allergies", ["Penicillin (rash)", "Sulfa drugs (hives)"])
+    + section("Social History", [
+        "Former smoker, quit 2010 (20 pack-years)",
+        "Alcohol: 1-2 glasses of wine per week",
+        "Retired teacher, lives with her husband",
+    ])
     + section("Vitals at Discharge", [
         "Blood Pressure: 132/84 mmHg", "Heart Rate: 78 bpm", "Temperature: 98.4 F", "SpO2: 96 %",
     ])

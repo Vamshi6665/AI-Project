@@ -62,6 +62,20 @@ class Settings(BaseSettings):
         }[self.llm_provider]
 
 
+def production_problems(settings: Settings) -> list[str]:
+    """Reasons the app must not start in prod. Empty list = safe to start."""
+    if settings.environment != "prod":
+        return []
+    problems = []
+    if settings.jwt_secret.startswith(("change-me", "REPLACE")) or len(settings.jwt_secret) < 32:
+        problems.append("JWT_SECRET is a placeholder or shorter than 32 characters")
+    if settings.demo_password in ("demo123", "") or settings.demo_password.startswith("REPLACE"):
+        problems.append("DEMO_PASSWORD is the default or a placeholder")
+    if settings.llm_provider == "mock":
+        problems.append("LLM_PROVIDER is mock")
+    return problems
+
+
 @lru_cache
 def get_settings() -> Settings:
     return Settings()

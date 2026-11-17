@@ -67,6 +67,10 @@ class ClinicalExtraction(_Lenient):
     vitals: list[Vital] = Field(default_factory=list)
     procedures: list[str] = Field(default_factory=list)
     follow_up: list[str] = Field(default_factory=list)
+    social_history: list[str] = Field(
+        default_factory=list,
+        description="Tobacco, alcohol, substance use, occupation, living situation, as stated",
+    )
     summary: str | None = Field(None, description="2-3 sentence clinical summary")
 
 
