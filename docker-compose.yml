@@ -1,0 +1,24 @@
+# Same file runs on your laptop and on EC2:   docker compose up -d --build
+# Then open http://localhost (laptop) or http://<EC2 public IP>.
+services:
+  backend:
+    build: ./backend
+    env_file: ./backend/.env
+    expose:
+      - "8000"            # reachable only by other containers, not from the internet
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "3" }
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy   # waits for the backend Dockerfile HEALTHCHECK
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "3" }

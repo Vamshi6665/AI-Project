@@ -1,0 +1,21 @@
+# secrets
+.env
+*.pem
+
+# python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# node
+node_modules/
+dist/
+
+# os/editor
+.DS_Store
+.vscode/
+.idea/
+
+# local AWS policy copy (contains account ID)
+ec2-policy.json

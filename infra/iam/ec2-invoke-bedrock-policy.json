@@ -1,0 +1,11 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "FallbackBedrockGptOss",
+      "Effect": "Allow",
+      "Action": "bedrock:InvokeModel",
+      "Resource": "arn:aws:bedrock:*::foundation-model/openai.gpt-oss-20b-1:0"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "InvokeOnlyTheClinicalAiEndpoint",
+      "Effect": "Allow",
+      "Action": "sagemaker:InvokeEndpoint",
+      "Resource": "arn:aws:sagemaker:us-east-1:ACCOUNT_ID:endpoint/clinical-ai-gptoss-20b"
+    }
+  ]
+}
